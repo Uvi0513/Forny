@@ -1,34 +1,24 @@
 #!/usr/bin/env python
+import re
 
-def add(x, y):
-    return x + y
-
-def subtract(x, y):
-    return x - y
-
-def multiply(x, y):
-    return x * y
-
-def divide(x, y):
-    if y != 0:
-        return x / y
-    else:
+def calculate(expression):
+    try:
+        return eval(expression)
+    except ZeroDivisionError:
         return "Cannot divide by zero"
+    except Exception as e:
+        return f"Error: {e}"
 
 if __name__ == "__main__":
-    num1 = float(input("Enter the first number: "))
-    operator = input("Enter the operator (+, -, *, /): ")
-    num2 = float(input("Enter the second number: "))
+    print("Simple Calculator for Termux")
+    print("Enter a mathematical expression (e.g., 5 + 3, 10 * 2, 15 / 3)")
 
-    if operator == "+":
-        result = add(num1, num2)
-    elif operator == "-":
-        result = subtract(num1, num2)
-    elif operator == "*":
-        result = multiply(num1, num2)
-    elif operator == "/":
-        result = divide(num1, num2)
-    else:
-        result = "Invalid operator"
+    user_input = input("Enter your problem: ")
 
+    # Check for invalid characters in the input
+    if not re.match("^[\d\s\.\+\-\*/\(\)]+$", user_input):
+        print("Invalid characters in the input. Please enter a valid expression.")
+        exit(1)
+
+    result = calculate(user_input)
     print(f"Result: {result}")
