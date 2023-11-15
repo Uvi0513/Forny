@@ -1,24 +1,15 @@
-#!/usr/bin/env python
-import re
+def colored_text(text, r, g, b):
+    return f"\033[38;2;{r};{g};{b}m{text}\033[0m"
 
-def calculate(expression):
-    try:
-        return eval(expression)
-    except ZeroDivisionError:
-        return "Cannot divide by zero"
-    except Exception as e:
-        return f"Error: {e}"
+text1 = "█▀▀ █▀█ █▀█ █▄░█ █▄█"
+text2 = "█▀░ █▄█ █▀▄ █░▀█ ░█░"
 
-if __name__ == "__main__":
-    print("Simple Calculator for Termux")
-    print("Enter a mathematical expression (e.g., 5 + 3, 10 * 2, 15 / 3)")
+# Set RGB values for each text
+color_red = (255, 0, 0)      # Red
+color_green = (0, 255, 0)    # Green
+color_yellow = (255, 255, 0) # Yellow
 
-    user_input = input("Enter your problem: ")
-
-    # Check for invalid characters in the input
-    if not re.match("^[\d\s\.\+\-\*/\(\)]+$", user_input):
-        print("Invalid characters in the input. Please enter a valid expression.")
-        exit(1)
-
-    result = calculate(user_input)
-    print(f"Result: {result}")
+# Print colored text
+print(colored_text(text1, *color_red))
+print(colored_text(text2, *color_green))
+print(colored_text(text1, *color_yellow))
